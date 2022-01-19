@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>scm-service</artifactId>
+        <groupId>com.utopa</groupId>
+        <version>0.0.1-release</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>scm-common</artifactId>
+    <groupId>com.utopa</groupId>
+    <packaging>jar</packaging>
+    <version>${project.version}</version>
+    <properties>
+        <maven.release.plugin>2.5.3</maven.release.plugin>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.swagger</groupId>
+                    <artifactId>swagger-models</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>1.5.22</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-models</artifactId>
+            <version>1.5.22</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+        </dependency>
+        <!-- SpringBoot Boot Redis -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>easyexcel</artifactId>
+            <version>3.0.2</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.9</version>
+        </dependency>
+
+        <!--webservice接口依赖-->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+            <version>3.3.4</version>
+        </dependency>
+
+
+
+
+    </dependencies>
+
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <profile.id>local</profile.id>
+                <project.version>0.0.1-SNAPSHOT</project.version>
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>environment/local</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <profile.id>dev</profile.id>
+                <project.version>0.0.1-SNAPSHOT</project.version>
+
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>environment/dev</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+        <profile>
+            <id>test</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <profile.id>test</profile.id>
+                <project.version>0.0.1-SNAPSHOT</project.version>
+
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>environment/test</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+                <profile.id>prod</profile.id>
+                <project.version>0.0.1-release</project.version>
+
+            </properties>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>environment/prod</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*</include>
+                        </includes>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+
+
+    </profiles>
+
+    <build>
+        <plugins>
+            <!-- maven私服版本管理 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${maven.release.plugin}</version>
+                <configuration>
+                    <autoVersionSubmodules>true</autoVersionSubmodules>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <arguments>-DskipTests</arguments>
+                    <preparationGoals>clean deploy</preparationGoals>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+   <!-- <distributionManagement>
+        <repository>
+            <id>it2-releases</id>
+            <name>Utopa Release Repository</name>
+            <url>http://10.186.102.104:8801/repository/it2-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>it2-snapshots</id>
+            <name>Utopa Snapshots Repository</name>
+            <url>http://10.186.102.104:8801/repository/it2-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>-->
+
+    <!-- 测试发布maven私服配置 -->
+    <distributionManagement>
+        <repository>
+            <id>it2-test</id>
+            <name>Utopa Release Repository</name>
+            <url>http://10.186.102.104:8801/repository/it2-test/</url>
+        </repository>
+        <snapshotRepository>
+            <id>it2-test</id>
+            <name>Utopa Snapshots Repository</name>
+            <url>http://10.186.102.104:8801/repository/it2-test/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <scm>
+        <developerConnection>scm:git:http://10.186.102.132:8888/it2/scm-common.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+</project>
